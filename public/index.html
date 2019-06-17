@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/public/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>{{.Title}}</h1>
+        <h5>{{.Author}}</h5>
+
+    </header>
+    <section class="cover">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            {{range .Demos.THead}}
+                            <th>{{.}}</th>
+                            {{end}}
+                            <th>链接</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{range .Demos.Fields}}
+                        <tr>
+                            <td>{{.ID}}</td>
+                            {{range .Fields}}
+                            <td>{{.}}</td>
+                            {{end}}
+                            <td><a href="{{.URL}}">{{.URL}}</a></td>
+                        </tr>
+                        {{end}}
+                    </tbody>
+                </table>
+            </div>
+    </section>
+
+</body>
+
+
+<footer>
+    <div id="footer-info" class="inner">&copy; {{.CopyRight}} <br>
+        <a href="http://sh.beian.miit.gov.cn/" target="_blank">{{.Beian}}</a>
+    </div>
+</footer>

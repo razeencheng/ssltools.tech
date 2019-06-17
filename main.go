@@ -1,13 +1,21 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 
 	"github.com/kataras/iris"
 )
 
+var buildTime string
+var version string
+
 func main() {
+
+	fmt.Println("BuildTime: ", buildTime)
+	fmt.Println("Version: ", version)
+
 	app := iris.Default()
 
 	tmpl := iris.HTML("./public", ".html")

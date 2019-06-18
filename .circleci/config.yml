@@ -9,6 +9,9 @@ jobs:
     working_directory: /go/src/github.com/razeencheng/ssltools.tech
     steps:
       - checkout
+      - run: |
+          pwd
+          ls
       - run: make build_bakcend
 
       - setup_remote_docker:

@@ -1,0 +1,24 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12.1
+    working_directory: /go/src/github.com/razeencheng/ssltools.tech
+    steps:
+      - checkout
+      - run: make build_bakcend
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - deploy:
+          command: |
+            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} 
+            make deploy_backend
+
+
+
+

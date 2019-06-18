@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strconv"
@@ -15,6 +16,14 @@ func main() {
 
 	fmt.Println("BuildTime: ", buildTime)
 	fmt.Println("Version: ", version)
+
+	var v bool
+	flag.BoolVar(&v, "v", false, "version")
+	flag.Parse()
+
+	if v {
+		os.Exit(0)
+	}
 
 	app := iris.Default()
 

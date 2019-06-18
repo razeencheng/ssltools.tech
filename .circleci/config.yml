@@ -9,16 +9,13 @@ jobs:
     working_directory: /go/src/github.com/razeencheng/ssltools.tech
     steps:
       - checkout
-      - run: |
-          pwd
-          ls
       - run: make build_backend
-
       - setup_remote_docker:
           docker_layer_caching: true
-
       - deploy:
           command: |
+            pwd
+            ls
             docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} 
             make deploy_backend
 

@@ -1,41 +1,46 @@
 # Golang CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-go/ for more details
-version: 2
 jobs:
-  - build_backend:
-       filters:
-         tags:
-           only: /v[0-9]+\.[0-9]+\.[0-9]+/
-         branches:
-           only: master
-       docker:
-         - image: circleci/golang:1.12.1
-       working_directory: /go/src/github.com/razeencheng/ssltools.tech
-       steps:
-         - checkout
-         - run: make build_backend
-         - setup_remote_docker:
-             docker_layer_caching: true
-         - deploy:
-             command: |
-               docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} 
-               make deploy_backend
-  - build_nginx:
-       filters:
-         tags:
-           only: /v[0-9]+\.[0-9]+\.[0-9]+/
-         branches:
-           only: master 
-         working_directory: /go/src/github.com/razeencheng/ssltools.tech
-         steps:
-           - checkout
-           - setup_remote_docker:
-             docker_layer_caching: true
-           - deploy:
-               command: |
-                 docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} 
-                 make deploy_nginx
+  backend:
+    filters:
+      tags:
+        only: /v[0-9]+\.[0-9]+\.[0-9]+/
+      branches:
+        only: master
+    docker:
+      - image: circleci/golang:1.12.1
+    working_directory: /go/src/github.com/razeencheng/ssltools.tech
+    steps:
+      - checkout
+      - run: make build_backend
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - deploy:
+          command: |
+            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} 
+            make deploy_backend
+  nginx:
+    filters:
+      tags:
+        only: /[0-9]+\.[0-9]+\.[0-9]_[0-9]+\.[0-9]+\.[0-9]+/
+      branches:
+        only: master 
+      working_directory: /go/src/github.com/razeencheng/ssltools.tech
+      steps:
+        - checkout
+        - setup_remote_docker:
+          docker_layer_caching: true
+        - deploy:
+            command: |
+              docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} 
+              make deploy_nginx
 
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - backend
+      - nginx
 
 

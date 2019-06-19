@@ -27,7 +27,7 @@ jobs:
       branches:
         only: master 
     docker:
-      - image: circleci/golang:1.12.11
+      - image: circleci/golang:1.12.1
     working_directory: /go/src/github.com/razeencheng/ssltools.tech
     steps:
       - checkout

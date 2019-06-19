@@ -99,7 +99,6 @@ func HandleDemoView(c iris.Context) {
 			if v.ID == id {
 				demo.Title = v.Fields[0]
 				demo.Desc = v.Fields[1]
-				return
 			}
 		}
 	}

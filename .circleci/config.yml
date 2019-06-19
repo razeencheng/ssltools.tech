@@ -26,6 +26,8 @@ jobs:
         only: /[0-9]+\.[0-9]+\.[0-9]_[0-9]+\.[0-9]+\.[0-9]+/
       branches:
         only: master 
+    machine:
+      image: ubuntu-1604:201903-01
     working_directory: /go/src/github.com/razeencheng/ssltools.tech
     steps:
       - checkout

@@ -7,3 +7,12 @@ services:
     environment:
       - RUN_MODE=prod
     restart: always
+  ssltools.tech:
+    image: razeencheng/nginx_tls13:${NGINX_TAG}
+    ports:
+      - "443:443"
+    volumes:
+      - "./certs:/certs"
+      - "./nginx/ssltools.tech.conf:/etc/nginx/conf.d/default.conf"
+    links:
+      - backend

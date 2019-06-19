@@ -8,6 +8,6 @@ deploy_backend: build_backend
 	@docker build -t razeencheng/ssltools_backend:${VERSION} .
 	@docker push razeencheng/ssltools_backend:${VERSION}
 
-build_nginx:
+deploy_nginx:
 	@docker build -t razeencheng/nginx_tls13:1.7.0_1.1.1 ./nginx
 	@docker push razeencheng/nginx_tls13:1.7.0_1.1.1
